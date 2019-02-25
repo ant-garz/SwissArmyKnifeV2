@@ -104,16 +104,13 @@ import java.util.ArrayList;
 
             //call Sleep Method with timer for execution
             startTimer = System.nanoTime(); //starting timer above the nested if statement so if it fails out then it still validly counts execution time
+            System.out.println("\nSleep");
+            long start = System.currentTimeMillis();
             for(int i = 0; i < 2; i++){
                 Sleep sleepy = new Sleep(i);
-
-                System.out.println("\nSleep");
-
-                long start = System.currentTimeMillis();    
-
                 sleepy.sleep(); 
-                System.out.println("Elapsed Time in milliseconds: " + (System.currentTimeMillis() - start + "\n"));
             }
+            System.out.println("Elapsed Time in milliseconds: " + (System.currentTimeMillis() - start + "\n"));
             endTimer = System.nanoTime();
             System.out.printf("Sleep Method Exeuction Time Elapsed: %.2f milliseconds", ((endTimer - startTimer) / 1E6));
 
@@ -121,11 +118,10 @@ import java.util.ArrayList;
         //calling SleepFast Method
         else if (args[0].equalsIgnoreCase("-SleepFast")) {
             System.out.println("SleepFast Method Executing...\n");
-            long start = System.currentTimeMillis();
-
+        
             //call Sleep Method with timer for execution
             startTimer = System.nanoTime(); //starting timer above the nested if statement so if it fails out then it still validly counts execution time
-
+            long start = System.currentTimeMillis();
             //Non-threaded Sleep instance
             System.out.println("\nNon-threaded Sleep");
             start = System.currentTimeMillis();    
@@ -260,6 +256,33 @@ import java.util.ArrayList;
             endTimer = System.nanoTime();
             System.out.printf("SleepFastImplementsRunnable Method Exeuction Time Elapsed: %.2f milliseconds", ((endTimer - startTimer) / 1E6));
 
+        }
+        //calling JSONValidateIndex Method
+        else if (args[0].equalsIgnoreCase("-JSONValidateIndex")) {
+            System.out.println("JSONValidateIndex Method Executing...\n");
+
+            //call JSONValidateIndex Method with timer for execution
+            startTimer = System.nanoTime(); //starting timer above the nested if statement so if it fails out then it still validly counts execution time
+            if (args.length < 2) {
+                System.out.println("Please enter in a valid URL in order for the JSONValidateIndex Method to properly work.\n");
+                endTimer = System.nanoTime(); //end timer and print execution time elapsed
+                System.out.printf("JSONValidateIndex Method Exeuction Time Elapsed: %.2f milliseconds", ((endTimer - startTimer) / 1E6));
+            } 
+            else {
+                //look for URL as second parameter of command line argument
+                String URL = args[1];
+                JSONValidateIndex urlRequest = new JSONValidateIndex();
+                if (urlRequest.readAllURL(URL)) {
+                    System.out.println(urlRequest);
+                    endTimer = System.nanoTime(); //end timer and print execution time elapsed
+                    System.out.printf("JSONValidateIndex Method Exeuction Time Elapsed: %.2f milliseconds", ((endTimer - startTimer) / 1E6));
+                }
+                else {
+                    //end timer for invalid URL in second parameter
+                    endTimer = System.nanoTime(); //end timer and print execution time elapsed
+                    System.out.printf("JSONValidateIndex Method Exeuction Time Elapsed: %.2f milliseconds", ((endTimer - startTimer) / 1E6));
+                }
+            }
         }
     }
 }
